@@ -7,7 +7,7 @@ const cors = require('cors')
 const AppRouter = require('./routers/routers')
 dotenv.config()
 const corsOptions={
-    origin: '*',
+    origin: 'https://swio-task.vercel.app/',
     optionSuccessStatus: 200
 }
 
