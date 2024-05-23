@@ -29,7 +29,7 @@ const addPayment = async (req, res) => {
 }
 
 const saveTransaction=async(req,res)=>{
-    console.log(req.name, req.amount)
+    
     const time = Date()
     console.log(time)
     const payment = new paymentModel({
@@ -38,7 +38,7 @@ const saveTransaction=async(req,res)=>{
         status:req.body.status
     })
     await payment.save()
-        .then((resp) => { console.log(resp); res.send({status:'success', id: session.id }) })
+        .then((resp) => { console.log(resp); res.send({status:'success'}) })
 
 }
 
