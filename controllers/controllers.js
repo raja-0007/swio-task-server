@@ -21,23 +21,29 @@ const addPayment = async (req, res) => {
             quantity: 1,
         }],
         mode: 'payment',
-        success_url: 'http://localhost:3000/success',
-        cancel_url: 'http://localhost:3000/cancel'
+        success_url: `${process.env.FRONTEND_URL}/success`,
+        cancel_url: `${process.env.FRONTEND_URL}/cancel`
     })
-    // console.log(req.name, req.amount)
-    // const payment = new paymentModel({
-    //     name: req.body.name,
-    //     amount: req.body.amount
-    // })
-    // await payment.save()
-    //     .then((resp) => { console.log(resp); res.send({status:'success', id: session.id }) })
-
+    
     res.send({ id: session.id })
+}
+
+const saveTransaction=async(req,res)=>{
+    console.log(req.name, req.amount)
+    const time = Date()
+    console.log(time)
+    const payment = new paymentModel({
+        name: req.body.name,
+        amount: req.body.amount
+    })
+    await payment.save()
+        .then((resp) => { console.log(resp); res.send({status:'success', id: session.id }) })
+
 }
 
 const getTransactions = async (req, res) => {
     const transactions = await paymentModel.find()
     res.send(transactions)
 }
-const controllers = { addPayment, getTransactions }
+const controllers = { addPayment, getTransactions, saveTransaction }
 module.exports = controllers
